@@ -8,6 +8,7 @@
 namespace SprykerShop\Yves\ProductMeasurementUnitWidget\Dependency\Service;
 
 use Generated\Shared\Transfer\NumberFormatConfigTransfer;
+use Generated\Shared\Transfer\NumberFormatFloatRequestTransfer;
 
 class ProductMeasurementUnitWidgetToUtilNumberServiceBridge implements ProductMeasurementUnitWidgetToUtilNumberServiceInterface
 {
@@ -32,5 +33,10 @@ class ProductMeasurementUnitWidgetToUtilNumberServiceBridge implements ProductMe
     public function getNumberFormatConfig(?string $locale = null): NumberFormatConfigTransfer
     {
         return $this->utilNumberService->getNumberFormatConfig($locale);
+    }
+
+    public function formatFloat(NumberFormatFloatRequestTransfer $numberFormatFloatRequestTransfer): string
+    {
+        return $this->utilNumberService->formatFloat($numberFormatFloatRequestTransfer);
     }
 }

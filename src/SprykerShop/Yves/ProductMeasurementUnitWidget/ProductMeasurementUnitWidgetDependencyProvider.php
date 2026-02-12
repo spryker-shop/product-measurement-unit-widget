@@ -42,6 +42,8 @@ class ProductMeasurementUnitWidgetDependencyProvider extends AbstractBundleDepen
      */
     public const SERVICE_UTIL_NUMBER = 'SERVICE_UTIL_NUMBER';
 
+    public const string CLIENT_GLOSSARY_STORAGE = 'CLIENT_GLOSSARY_STORAGE';
+
     /**
      * @param \Spryker\Yves\Kernel\Container $container
      *
@@ -54,6 +56,7 @@ class ProductMeasurementUnitWidgetDependencyProvider extends AbstractBundleDepen
         $container = $this->addLocaleClient($container);
         $container = $this->addUtilEncodingService($container);
         $container = $this->addUtilNumberService($container);
+        $container = $this->addGlossaryStorageClient($container);
 
         return $container;
     }
@@ -133,6 +136,15 @@ class ProductMeasurementUnitWidgetDependencyProvider extends AbstractBundleDepen
             return new ProductMeasurementUnitWidgetToUtilNumberServiceBridge(
                 $container->getLocator()->utilNumber()->service(),
             );
+        });
+
+        return $container;
+    }
+
+    protected function addGlossaryStorageClient(Container $container): Container
+    {
+        $container->set(static::CLIENT_GLOSSARY_STORAGE, function (Container $container) {
+            return $container->getLocator()->glossaryStorage()->client();
         });
 
         return $container;

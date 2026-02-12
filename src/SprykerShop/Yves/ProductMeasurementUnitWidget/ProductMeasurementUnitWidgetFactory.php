@@ -7,15 +7,30 @@
 
 namespace SprykerShop\Yves\ProductMeasurementUnitWidget;
 
+use Spryker\Client\GlossaryStorage\GlossaryStorageClientInterface;
 use Spryker\Yves\Kernel\AbstractFactory;
 use SprykerShop\Yves\ProductMeasurementUnitWidget\Dependency\Client\ProductMeasurementUnitWidgetToLocaleClientInterface;
 use SprykerShop\Yves\ProductMeasurementUnitWidget\Dependency\Client\ProductMeasurementUnitWidgetToProductMeasurementUnitStorageClientInterface;
 use SprykerShop\Yves\ProductMeasurementUnitWidget\Dependency\Client\ProductMeasurementUnitWidgetToProductQuantityStorageClientInterface;
 use SprykerShop\Yves\ProductMeasurementUnitWidget\Dependency\Service\ProductMeasurementUnitWidgetToUtilEncodingServiceInterface;
 use SprykerShop\Yves\ProductMeasurementUnitWidget\Dependency\Service\ProductMeasurementUnitWidgetToUtilNumberServiceInterface;
+use SprykerShop\Yves\ProductMeasurementUnitWidget\Formatter\ProductMeasurementUnitFormatter;
+use SprykerShop\Yves\ProductMeasurementUnitWidget\Formatter\ProductMeasurementUnitFormatterInterface;
 
+/**
+ * @method \SprykerShop\Yves\ProductMeasurementUnitWidget\ProductMeasurementUnitWidgetConfig getConfig()
+ */
 class ProductMeasurementUnitWidgetFactory extends AbstractFactory
 {
+    public function createProductMeasurementUnitFormatter(): ProductMeasurementUnitFormatterInterface
+    {
+        return new ProductMeasurementUnitFormatter(
+            $this->getUtilNumberService(),
+            $this->getGlossaryStorageClient(),
+            $this->getConfig(),
+        );
+    }
+
     /**
      * @return \SprykerShop\Yves\ProductMeasurementUnitWidget\Dependency\Client\ProductMeasurementUnitWidgetToProductMeasurementUnitStorageClientInterface
      */
@@ -54,5 +69,10 @@ class ProductMeasurementUnitWidgetFactory extends AbstractFactory
     public function getUtilNumberService(): ProductMeasurementUnitWidgetToUtilNumberServiceInterface
     {
         return $this->getProvidedDependency(ProductMeasurementUnitWidgetDependencyProvider::SERVICE_UTIL_NUMBER);
+    }
+
+    public function getGlossaryStorageClient(): GlossaryStorageClientInterface
+    {
+        return $this->getProvidedDependency(ProductMeasurementUnitWidgetDependencyProvider::CLIENT_GLOSSARY_STORAGE);
     }
 }

@@ -4,14 +4,19 @@
     <transfer name="Item">
         <property name="quantitySalesUnit" type="ProductMeasurementSalesUnit"/>
         <property name="id" type="int"/>
+        <property name="stockQuantity" type="float" strict="true"/>
+        <property name="amountSalesUnit" type="ProductMeasurementSalesUnit"/>
     </transfer>
 
     <transfer name="ProductView">
         <property name="idProductConcrete" type="int"/>
+        <property name="stockQuantity" type="float" strict="true"/>
+        <property name="baseUnit" type="ProductMeasurementUnit" strict="true"/>
     </transfer>
 
     <transfer name="ProductMeasurementUnit">
         <property name="idProductMeasurementUnit" type="int"/>
+        <property name="name" type="string"/>
     </transfer>
 
     <transfer name="ProductMeasurementSalesUnit">
@@ -40,6 +45,25 @@
     </transfer>
 
     <transfer name="NumberFormatConfig">
+    </transfer>
+
+    <transfer name="ProductMeasurementBaseUnit">
+        <property name="productMeasurementUnit" type="ProductMeasurementUnit"/>
+    </transfer>
+
+    <transfer name="NumberFormatFloatRequest">
+        <property name="number" type="float"/>
+        <property name="numberFormatFilter" type="NumberFormatFilter"/>
+    </transfer>
+
+    <transfer name="NumberFormatFilter">
+        <property name="locale" type="string"/>
+        <property name="maxFractionDigits" type="int"/>
+    </transfer>
+
+    <transfer name="BuyBoxProduct" strict="true">
+        <property name="stockQuantity" type="float"/>
+        <property name="baseUnit" type="ProductMeasurementUnit"/>
     </transfer>
 
 </transfers>
