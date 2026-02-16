@@ -81,7 +81,12 @@ class ProductMeasurementUnitFormatter implements ProductMeasurementUnitFormatter
         }
 
         if ($product instanceof ItemTransfer) {
-            $measurementUnit = $product->getAmountSalesUnit()?->getProductMeasurementBaseUnit()?->getProductMeasurementUnit();
+            $productMeasurementSalesUnitTransfer = $product->getQuantitySalesUnit() ?: $product->getAmountSalesUnit();
+            if (!$productMeasurementSalesUnitTransfer) {
+                return null;
+            }
+
+            $measurementUnit = $productMeasurementSalesUnitTransfer->getProductMeasurementBaseUnit()?->getProductMeasurementUnit();
         }
 
         if ($measurementUnit === null || !$measurementUnit->getName()) {

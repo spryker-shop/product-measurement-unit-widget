@@ -158,6 +158,22 @@ class ProductMeasurementUnitQuantityFormatterStrategyPluginTest extends Unit
                 ],
                 'expectedResult' => static::FORMATTED_NUMBER . ' kilogram',
             ],
+            'Item with quantitySalesUnit uses short form' => [
+                'product' => $this->createItemWithQuantitySalesUnit(),
+                'translationMap' => [
+                    [$shortKey, static::LOCALE, [], 'kg'],
+                    [static::MEASUREMENT_UNIT_NAME, static::LOCALE, [], 'kilogram'],
+                ],
+                'expectedResult' => static::FORMATTED_NUMBER . ' kg',
+            ],
+            'Item with both quantitySalesUnit and amountSalesUnit prioritizes quantitySalesUnit' => [
+                'product' => $this->createItemWithBothSalesUnits(),
+                'translationMap' => [
+                    [$shortKey, static::LOCALE, [], 'kg'],
+                    [static::MEASUREMENT_UNIT_NAME, static::LOCALE, [], 'kilogram'],
+                ],
+                'expectedResult' => static::FORMATTED_NUMBER . ' kg',
+            ],
             'ProductView with baseUnit but empty name returns null' => [
                 'product' => (new ProductViewTransfer())
                     ->setStockQuantity(static::STOCK_QUANTITY)
@@ -197,6 +213,14 @@ class ProductMeasurementUnitQuantityFormatterStrategyPluginTest extends Unit
             ],
             'Item with amountSalesUnit returns true' => [
                 'product' => $this->createItemWithMeasurementUnit(),
+                'expectedIsApplicable' => true,
+            ],
+            'Item with quantitySalesUnit returns true' => [
+                'product' => $this->createItemWithQuantitySalesUnit(),
+                'expectedIsApplicable' => true,
+            ],
+            'Item with both quantitySalesUnit and amountSalesUnit returns true' => [
+                'product' => $this->createItemWithBothSalesUnits(),
                 'expectedIsApplicable' => true,
             ],
             'Item without amountSalesUnit returns false' => [
@@ -251,6 +275,39 @@ class ProductMeasurementUnitQuantityFormatterStrategyPluginTest extends Unit
                 (new ProductMeasurementSalesUnitTransfer())->setProductMeasurementBaseUnit(
                     (new ProductMeasurementBaseUnitTransfer())->setProductMeasurementUnit(
                         (new ProductMeasurementUnitTransfer())->setName(static::MEASUREMENT_UNIT_NAME),
+                    ),
+                ),
+            );
+    }
+
+    protected function createItemWithQuantitySalesUnit(): ItemTransfer
+    {
+        return (new ItemTransfer())
+            ->setStockQuantity(static::STOCK_QUANTITY)
+            ->setQuantitySalesUnit(
+                (new ProductMeasurementSalesUnitTransfer())->setProductMeasurementBaseUnit(
+                    (new ProductMeasurementBaseUnitTransfer())->setProductMeasurementUnit(
+                        (new ProductMeasurementUnitTransfer())->setName(static::MEASUREMENT_UNIT_NAME),
+                    ),
+                ),
+            );
+    }
+
+    protected function createItemWithBothSalesUnits(): ItemTransfer
+    {
+        return (new ItemTransfer())
+            ->setStockQuantity(static::STOCK_QUANTITY)
+            ->setQuantitySalesUnit(
+                (new ProductMeasurementSalesUnitTransfer())->setProductMeasurementBaseUnit(
+                    (new ProductMeasurementBaseUnitTransfer())->setProductMeasurementUnit(
+                        (new ProductMeasurementUnitTransfer())->setName(static::MEASUREMENT_UNIT_NAME),
+                    ),
+                ),
+            )
+            ->setAmountSalesUnit(
+                (new ProductMeasurementSalesUnitTransfer())->setProductMeasurementBaseUnit(
+                    (new ProductMeasurementBaseUnitTransfer())->setProductMeasurementUnit(
+                        (new ProductMeasurementUnitTransfer())->setName('measurement_units.standard.volume.liter.name'),
                     ),
                 ),
             );
