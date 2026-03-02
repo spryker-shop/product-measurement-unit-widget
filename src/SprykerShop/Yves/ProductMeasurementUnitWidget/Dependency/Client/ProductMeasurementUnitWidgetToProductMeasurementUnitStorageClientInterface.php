@@ -13,20 +13,10 @@ use Generated\Shared\Transfer\ProductMeasurementUnitTransfer;
 
 interface ProductMeasurementUnitWidgetToProductMeasurementUnitStorageClientInterface
 {
-    /**
-     * @param int $idProductMeasurementUnit
-     *
-     * @return \Generated\Shared\Transfer\ProductMeasurementUnitStorageTransfer|null
-     */
     public function findProductMeasurementUnitStorage(
         int $idProductMeasurementUnit
     ): ?ProductMeasurementUnitStorageTransfer;
 
-    /**
-     * @param int $idProduct
-     *
-     * @return \Generated\Shared\Transfer\ProductConcreteMeasurementUnitStorageTransfer|null
-     */
     public function findProductConcreteMeasurementUnitStorage(
         int $idProduct
     ): ?ProductConcreteMeasurementUnitStorageTransfer;
@@ -38,10 +28,5 @@ interface ProductMeasurementUnitWidgetToProductMeasurementUnitStorageClientInter
      */
     public function findProductMeasurementSalesUnitByIdProductConcrete(int $idProductConcrete): ?array;
 
-    /**
-     * @param int $idProductConcrete
-     *
-     * @return \Generated\Shared\Transfer\ProductMeasurementUnitTransfer|null
-     */
     public function findProductMeasurementBaseUnitByIdProductConcrete(int $idProductConcrete): ?ProductMeasurementUnitTransfer;
 }

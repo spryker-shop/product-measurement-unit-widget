@@ -9,8 +9,5 @@ namespace SprykerShop\Yves\ProductMeasurementUnitWidget\Dependency\Client;
 
 interface ProductMeasurementUnitWidgetToLocaleClientInterface
 {
-    /**
-     * @return string
-     */
     public function getCurrentLocale(): string;
 }

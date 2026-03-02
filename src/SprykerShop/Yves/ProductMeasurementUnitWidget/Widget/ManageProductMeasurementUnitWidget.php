@@ -17,11 +17,6 @@ use Spryker\Yves\Kernel\Widget\AbstractWidget;
  */
 class ManageProductMeasurementUnitWidget extends AbstractWidget
 {
-    /**
-     * @param \Generated\Shared\Transfer\ProductViewTransfer $productViewTransfer
-     * @param bool $isAddToCartDisabled
-     * @param array $quantityOptions
-     */
     public function __construct(ProductViewTransfer $productViewTransfer, bool $isAddToCartDisabled, array $quantityOptions = [])
     {
         $salesUnits = null;
@@ -56,11 +51,6 @@ class ManageProductMeasurementUnitWidget extends AbstractWidget
             ->addParameter('jsonScheme', $jsonSchema);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductQuantityStorageTransfer|null $productQuantityStorageTransfer
-     *
-     * @return int
-     */
     protected function getMinQuantityInBaseUnits(
         ?ProductQuantityStorageTransfer $productQuantityStorageTransfer = null
     ): int {
@@ -72,17 +62,11 @@ class ManageProductMeasurementUnitWidget extends AbstractWidget
         return $quantityMin;
     }
 
-    /**
-     * @return string
-     */
     public static function getName(): string
     {
         return 'ManageProductMeasurementUnitWidget';
     }
 
-    /**
-     * @return string
-     */
     public static function getTemplate(): string
     {
         return '@ProductMeasurementUnitWidget/views/pdp-product-measurement-unit/pdp-product-measurement-unit.twig';

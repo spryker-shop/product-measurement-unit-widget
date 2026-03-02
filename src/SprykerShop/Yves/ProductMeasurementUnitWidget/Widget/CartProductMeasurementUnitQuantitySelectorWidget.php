@@ -35,9 +35,6 @@ class CartProductMeasurementUnitQuantitySelectorWidget extends AbstractWidget
      */
     protected const PARAMETER_NUMBER_FORMAT_CONFIG = 'numberFormatConfig';
 
-    /**
-     * @param \Generated\Shared\Transfer\ItemTransfer $itemTransfer
-     */
     public function __construct(ItemTransfer $itemTransfer)
     {
         $this->addItemTransferParameter($itemTransfer);
@@ -46,47 +43,26 @@ class CartProductMeasurementUnitQuantitySelectorWidget extends AbstractWidget
         $this->addNumberFormatConfigParameter();
     }
 
-    /**
-     * @return string
-     */
     public static function getName(): string
     {
         return 'CartProductMeasurementUnitQuantitySelectorWidget';
     }
 
-    /**
-     * @return string
-     */
     public static function getTemplate(): string
     {
         return '@ProductMeasurementUnitWidget/views/cart-product-measurement-unit-quantity-selector/cart-product-measurement-unit-quantity-selector.twig';
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\ItemTransfer $itemTransfer
-     *
-     * @return void
-     */
     protected function addItemTransferParameter(ItemTransfer $itemTransfer): void
     {
         $this->addParameter(static::PARAMETER_ITEM_TRANSFER, $itemTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\ItemTransfer $itemTransfer
-     *
-     * @return void
-     */
     protected function addQuantitySalesUnitParameter(ItemTransfer $itemTransfer): void
     {
         $this->addParameter(static::PARAMETER_QUANTITY_SALES_UNIT, $itemTransfer->getQuantitySalesUnit());
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\ItemTransfer $itemTransfer
-     *
-     * @return void
-     */
     protected function addQuantitySalesUnitPrecisionParameter(ItemTransfer $itemTransfer): void
     {
         $quantitySalesUnitPrecision = null;
@@ -97,9 +73,6 @@ class CartProductMeasurementUnitQuantitySelectorWidget extends AbstractWidget
         $this->addParameter(static::PARAMETER_QUANTITY_SALES_UNIT_PRECISION, $quantitySalesUnitPrecision);
     }
 
-    /**
-     * @return void
-     */
     protected function addNumberFormatConfigParameter(): void
     {
         $numberFormatConfigTransfer = $this->getFactory()

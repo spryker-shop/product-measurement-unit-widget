@@ -12,11 +12,6 @@ use Generated\Shared\Transfer\NumberFormatFloatRequestTransfer;
 
 interface ProductMeasurementUnitWidgetToUtilNumberServiceInterface
 {
-    /**
-     * @param string|null $locale
-     *
-     * @return \Generated\Shared\Transfer\NumberFormatConfigTransfer
-     */
     public function getNumberFormatConfig(?string $locale = null): NumberFormatConfigTransfer;
 
     public function formatFloat(NumberFormatFloatRequestTransfer $numberFormatFloatRequestTransfer): string;
