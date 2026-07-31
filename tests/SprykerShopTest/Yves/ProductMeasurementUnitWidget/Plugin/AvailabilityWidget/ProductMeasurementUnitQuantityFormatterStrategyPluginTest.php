@@ -86,6 +86,8 @@ class ProductMeasurementUnitQuantityFormatterStrategyPluginTest extends Unit
 
     /**
      * @dataProvider formatQuantityDataProvider
+     *
+     * @param list<array{string, string, array<string, mixed>, string}> $translationMap
      */
     public function testGivenProductWhenFormattingQuantityThenReturnsExpectedResult(
         mixed $product,
