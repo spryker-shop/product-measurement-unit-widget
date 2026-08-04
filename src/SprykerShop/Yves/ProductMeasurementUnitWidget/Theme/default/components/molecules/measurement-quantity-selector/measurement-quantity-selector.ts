@@ -67,8 +67,6 @@ export default class MeasurementQuantitySelector extends Component {
     // eslint-disable-next-line @typescript-eslint/no-magic-numbers
     protected readonly degree = [2, 3];
 
-    protected readyCallback(): void {}
-
     protected init(): void {
         this.qtyInSalesUnitInput = <HTMLInputElement>(
             this.getElementsByClassName(`${this.jsName}__sales-unit-quantity`)[0]
